@@ -1,0 +1,22 @@
+.wrapper {
+  background-color: red;
+  width: 90vw;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  h1 {
+    grid-row-start: 1;
+    grid-row-end: 2;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    background-color: blue;
+  }
+
+  .wrapper_content {
+    background-color: green;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
