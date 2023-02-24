@@ -1,8 +1,7 @@
 import "./App.scss";
-import pokemon from "./pokemon.json";
 import PokemonRow from "./components/PokemonRow";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 PokemonRow.propTypes = {
   pokemon: PropTypes.shape({
@@ -45,11 +44,20 @@ PokemonInfo.propTypes = {
 function App() {
   const [filter, setFilter] = useState("");
   const [selected, setSelectItem] = useState(null);
+  const [pokemon, setPokemon] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/starting-react/pokemon.json")
+      .then((ans) => ans.json())
+      .then((data) => setPokemon(data));
+  });
+
   return (
     <div className="wrapper">
       <h1 className="wrapper_title">Pokemon List</h1>
-      <div>
-        <div className="wrapper_content">
+      <div className="wrapper_line"></div>
+      <div className="wrapper_content">
+        <div className="wrapper_table">
           <input
             className="wrapper_filter"
             type="text"
@@ -59,6 +67,7 @@ function App() {
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
           />
+
           <table className="wrapper_tableMain">
             <thead>
               <tr>
@@ -73,7 +82,7 @@ function App() {
                     .toLowerCase()
                     .includes(filter.toLowerCase())
                 )
-                .slice(0, 10)
+                .slice(0, 50)
                 .map((pokemon) => (
                   <PokemonRow
                     key={pokemon.id}
@@ -84,7 +93,7 @@ function App() {
             </tbody>
           </table>
         </div>
-        {selected && <PokemonInfo {...selected} />}
+        <div>{selected && <PokemonInfo {...selected} />}</div>
       </div>
     </div>
   );

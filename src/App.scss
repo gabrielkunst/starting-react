@@ -1,22 +1,164 @@
 .wrapper {
-  background-color: red;
   width: 90vw;
   max-width: 800px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
 
   h1 {
-    grid-row-start: 1;
-    grid-row-end: 2;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    background-color: blue;
+    font-size: max(3rem, 2vw);
+    text-align: center;
+    letter-spacing: 0.1rem;
+    margin-top: 1rem;
+  }
+
+  .wrapper_line {
+    width: max(15rem, 15vw);
+    height: 0.3rem;
+    background-color: white;
+    border-radius: 1rem;
+    margin: 0 auto;
+    margin-bottom: 2rem;
   }
 
   .wrapper_content {
-    background-color: green;
-    grid-column-start: 1;
-    grid-column-end: 3;
+    height: 100%;
+    border: 2px solid rgb(0, 255, 0);
+    border-radius: 1rem;
+    flex: 1 1 0%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+
+    .wrapper_table,
+    .wrapper_tableSide {
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1rem;
+    }
+
+    .wrapper_table {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: auto;
+
+      input {
+        padding: 1rem;
+        background: #333;
+        border: 2px solid transparent;
+        outline: 2px solid transparent;
+        border-radius: 1rem;
+        margin-bottom: 2rem;
+        font-size: max(1.2rem, 1vw);
+        letter-spacing: 0.1rem;
+        transition: all 0.3s ease;
+
+        &:focus {
+          border-color: rgb(0, 255, 0);
+        }
+      }
+
+      table {
+        font-size: max(1.1rem, 0.8vw);
+        letter-spacing: 0.1rem;
+
+        thead {
+          font-size: max(1.2rem, 1vw);
+          font-weight: bold;
+          letter-spacing: 0.2rem;
+        }
+
+        td {
+          padding: 0.3em;
+          width: 33%;
+
+          &:has(button) {
+            text-align: center;
+          }
+
+          button {
+            color: white;
+            background: #444;
+
+            letter-spacing: 0.1rem;
+            padding: 0.5rem max(1.5rem, 1vw);
+            border-radius: 1rem;
+            cursor: pointer;
+            border: 1.5px solid transparent;
+            outline: 1.5px solid transparent;
+            transition: all 0.5s ease;
+            font-size: max(0.9rem, 0.8vw);
+
+            &:hover {
+              border-color: rgb(0, 255, 0);
+            }
+          }
+        }
+      }
+    }
+
+    .wrapper_tableSide {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: auto;
+      width: 100%;
+
+      h2 {
+        padding: 1rem;
+        text-align: center;
+        letter-spacing: 0.1rem;
+        font-size: max(2rem, 1vw);
+      }
+
+      td {
+        font-size: max(1.2rem, 0.8vw);
+        width: 90%;
+        text-align: left;
+      }
+
+      td + td {
+        width: 20%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper_content {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto 1fr !important;
+
+    .wrapper_table {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+
+    .wrapper_tableSide {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 2;
+      grid-row-end: 3;
+      padding: 1rem 2rem 2rem !important;
+      width: 80% !important;
+      margin: 0 auto;
+
+      tr {
+        display: block;
+        border: 2px solid rgba(0, 255, 0, 0.5) !important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        margin: 0.5rem;
+        border-radius: 1rem;
+        padding: 0.5rem 1rem;
+        letter-spacing: 0.1rem;
+      }
+    }
   }
 }
